@@ -8,9 +8,13 @@ class SignalDetection:
 		self.correct_rejections = correct_rejections
 
 	def hit_rate(self):
+		if((self.hits+self.misses) == 0): #account for /0 error
+			return 0
 		return (self.hits) / (self.hits + self.misses) #gpt suggests .5 and 1 for edge cases of small samples
 
 	def false_alarm_rate(self):
+		if((self.false_alarms+self.correct_rejections) == 0): #account for /0 error
+			return 0
 		return (self.false_alarms) / (self.false_alarms + self.correct_rejections)
 
 	def d_prime(self):
